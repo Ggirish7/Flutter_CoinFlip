@@ -10,6 +10,14 @@ class CoinScreen extends StatefulWidget {
 }
 
 class _CoinScreenState extends State<CoinScreen> {
+  bool soundOn = true;
+
+  void soundOnOff() {
+    setState(() {
+      soundOn = !soundOn;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -22,16 +30,27 @@ class _CoinScreenState extends State<CoinScreen> {
               children: [
                 Container(
                   padding: EdgeInsets.fromLTRB(10, 20, 0, 0),
-                  child: Icon(
-                    Icons.volume_up_sharp,
-                    size: 40,
-                  ),
+                  child: soundOn
+                      ? GestureDetector(
+                          onTap: soundOnOff,
+                          child: Icon(
+                            Icons.volume_up,
+                            size: 40,
+                          ))
+                      : GestureDetector(
+                          onTap: soundOnOff,
+                          child: Icon(
+                            Icons.volume_off,
+                            size: 40,
+                          )),
                 ),
                 Container(
                   padding: EdgeInsets.fromLTRB(10, 10, 0, 0),
-                  child: Icon(
-                    Icons.info,
-                    size: 38,
+                  child: GestureDetector(
+                    child: Icon(
+                      Icons.info,
+                      size: 38,
+                    ),
                   ),
                 ),
               ],
